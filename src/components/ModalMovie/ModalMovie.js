@@ -7,14 +7,12 @@ function ModalMovie({ movie, closeModal }) {
     const [comment, setComment] = useState('');
 
     useEffect(() => {
-        // This effect will run when the component mounts or when 'comment' changes
         console.log('Comment changed:', comment);
     }, [comment]);
 
     const handleAddToFavorites = async () => {
         console.log('Adding to favorites:', movie, 'with comment:', comment);
 
-        // Perform the data-saving logic here
         const serverURL = 'http://localhost:3007/addMovie';
         const requestOptions = {
             method: 'POST',
@@ -32,10 +30,8 @@ function ModalMovie({ movie, closeModal }) {
             const response = await fetch(serverURL, requestOptions);
             const data = await response.json();
 
-            // Log the response from the server
             console.log('Server response:', data);
 
-            // Close the modal after handling the add to favorites action
             closeModal();
         } catch (error) {
             console.error('Error adding to favorites:', error);
