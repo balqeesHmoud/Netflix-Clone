@@ -3,10 +3,10 @@ import MovieList from '../MovieList/MovieList';
 
 function Home() {
   return (
-    <>
-      <h1>Trending Movies</h1>
+    <div className="container mt-4">
+      <h1 className="mb-4">Trending Movies</h1>
       <MovieList />
-    </>
+    </div>
   );
 }
 
