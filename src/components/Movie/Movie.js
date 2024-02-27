@@ -2,13 +2,14 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
-import ModalMovie from '../ModalMovie/ModalMovie'; // Adjust the import based on your project structure
+import ModalMovie from '../ModalMovie/ModalMovie';
 
 function Movie({ movie, openModal }) {
   return (
-    <Col key={movie.ID}>
-      <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={movie.image} />
+    <Col xs={12} sm={6} md={4} lg={3} key={movie.ID} className="mb-4">
+      <Card>
+        <Card.Img variant="top" src={movie.poster_path} />
+
         <Card.Body>
           <Card.Title>{movie.title}</Card.Title>
           <Card.Text>{movie.overview}</Card.Text>
@@ -17,9 +18,6 @@ function Movie({ movie, openModal }) {
           </Button>
         </Card.Body>
       </Card>
-      {movie.selectedMovie && (
-        <ModalMovie movie={movie.selectedMovie} closeModal={movie.closeModal} />
-      )}
     </Col>
   );
 }

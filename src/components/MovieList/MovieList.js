@@ -9,7 +9,7 @@ function MovieList() {
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   const sendReq = async () => {
-    const serverURL = "http://localhost:3007/trending";
+    const serverURL = 'https://movies-library-be-server.onrender.com/trending';
     const res = await fetch(serverURL);
     const jsonRes = await res.json();
     setMoviesArr(jsonRes);
@@ -29,13 +29,13 @@ function MovieList() {
 
   return (
     <Row xs={1} md={4} className="g-4">
-    {moviesArr.map((item) => (
-      <Movie key={item.ID} movie={item} openModal={openModal} />
-    ))}
-    {selectedMovie && (
-      <ModalMovie movie={selectedMovie} closeModal={closeModal} />
-    )}
-  </Row>
+      {moviesArr.map((item) => (
+        <Movie key={item.ID} movie={item} openModal={openModal} />
+      ))}
+      {selectedMovie && (
+        <ModalMovie movie={selectedMovie} closeModal={closeModal} />
+      )}
+    </Row>
   );
 }
 
