@@ -40,22 +40,26 @@ function FavList() {
             console.error('Invalid item or item id.');
             return;
         }
-
+    
         const serverURLUpdate = `https://movies-library-be-server.onrender.com/update/${item.id}`;
-        
+    
         try {
             const res = await fetch(serverURLUpdate, {
-                method: 'PATCH',  
+                method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ comments: newComment }),
             });
-
+    
             if (res.ok) {
                 const data = await res.json();
                 if (data.success) {
-                    setFavArr(data.updatedData);
+                    setFavArr((prevArr) => {
+                        return prevArr.map((prevItem) =>
+                            prevItem.id === item.id ? { ...prevItem, comments: newComment } : prevItem
+                        );
+                    });
                     handleCloseModal();
                 } else {
                     console.error('Failed to update comment - Server response indicates failure:', data.error);
@@ -68,6 +72,7 @@ function FavList() {
             console.error('Failed to update comment - Unexpected error:', error);
         }
     }
+    
 
     const handleDeleteClick = async (itemId) => {
         const serverURLDelete = `https://movies-library-be-server.onrender.com/delete/${itemId}`
